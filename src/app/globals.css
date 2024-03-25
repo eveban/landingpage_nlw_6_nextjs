@@ -365,8 +365,9 @@ nav.show div.icon-close {
 	margin-bottom: 1rem;
 }
 
-#about .text p {
-	margin-bottom: 2rem;
+#about .text {
+	margin-left: 1.5rem;
+	margin-right: 1.5rem;
 }
 
 /*=============== END ABOUT  =============== */
