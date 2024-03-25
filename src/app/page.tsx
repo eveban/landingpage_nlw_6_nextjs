@@ -1,113 +1,505 @@
-import Image from "next/image";
+/* eslint-disable @next/next/no-img-element */
+'use client';
+import { useEffect } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Mousewheel, Keyboard } from 'swiper/modules';
+import ScrollReveal from 'scrollreveal';
+
+import Image from 'next/image';
+import image10 from './assets/fotos/10.jpeg';
+import image26 from './assets/fotos/26.jpeg';
+import image56 from './assets/fotos/56.jpeg';
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+	useEffect(() => {
+		const nav = document.querySelector('#header nav');
+		const toggle = document.querySelectorAll('nav .toggle');
+		const links = document.querySelectorAll('nav ul li a');
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+		const header = document.querySelector('#header') as HTMLElement;
+		const navHeight = header?.offsetHeight;
+		const sections = document.querySelectorAll('main section[id]');
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+		const changeHeaderWhenScroll = () => {
+			if (window.scrollY >= navHeight) {
+				header?.classList.add('scroll');
+			} else {
+				header?.classList.remove('scroll');
+			}
+		};
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+		const backToTop = () => {
+			const backToTopButton = document.querySelector('.back-to-top');
+			if (window.scrollY >= 560) {
+				backToTopButton?.classList.add('show');
+			} else {
+				backToTopButton?.classList.remove('show');
+			}
+		};
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
+		window.addEventListener('scroll', () => {
+			changeHeaderWhenScroll();
+			backToTop();
+			activateMenuAtCurrentSection();
+		});
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  );
+		const handleClickToggle = () => {
+			nav?.classList.toggle('show');
+		};
+
+		const handleClickLink = () => {
+			nav?.classList.remove('show');
+		};
+
+		const activateMenuAtCurrentSection = () => {
+			const checkpoint = window.scrollY + (window.innerHeight / 8) * 4;
+			for (const section of sections) {
+				const sectionTop = section.offsetTop;
+				const sectionHeight = section.offsetHeight;
+				const sectionId = section.getAttribute('id');
+
+				const checkpointStart = checkpoint >= sectionTop;
+				const checkpointEnd = checkpoint <= sectionTop + sectionHeight;
+
+				if (checkpointStart && checkpointEnd) {
+					document
+						.querySelector('nav ul li a[href*=' + sectionId + ']')
+						.classList.add('active');
+				} else {
+					document
+						.querySelector('nav ul li a[href*=' + sectionId + ']')
+						.classList.remove('active');
+				}
+			}
+		};
+
+		toggle.forEach(element => {
+			element.addEventListener('click', handleClickToggle);
+		});
+
+		links.forEach(link => {
+			link.addEventListener('click', handleClickLink);
+		});
+
+		return () => {
+			toggle.forEach(element => {
+				element.removeEventListener('click', handleClickToggle);
+			});
+			links.forEach(link => {
+				link.removeEventListener('click', handleClickLink);
+			});
+		};
+	}, []);
+
+	useEffect(() => {
+		const scrollReveal = ScrollReveal({
+			origin: 'top',
+			distance: '30px',
+			duration: 700,
+			reset: true,
+		});
+
+		scrollReveal.reveal(
+			`#home .image, #home .text,
+			#about .image, #about .text,
+			#services header, #services .card,
+			#price header, #price .card,
+			#testimonials header, #testimonials .testimonials,
+			#contact .text, #contact .links,
+			footer .brand, footer .social
+			`,
+			{ interval: 100 }
+		);
+
+		// const node = document.querySelector('#cake');
+		// const nodeList = document.querySelectorAll('.cookies');
+		// const nodeArray = [
+		// 	document.querySelector('#pie'),
+		// 	document.querySelector('#spoon'),
+		// 	document.querySelector('#ice-cream'),
+		// ];
+
+		// ScrollReveal().reveal(node);
+		// ScrollReveal().reveal(nodeList);
+		// ScrollReveal().reveal(nodeArray);
+	}, []);
+
+	return (
+		<div>
+			<header id="header" className="scroll">
+				<nav className="container">
+					<a className="logo" href="#">
+						beauty<span>salon</span>.
+					</a>
+					<div className="menu">
+						<ul className="grid">
+							<li>
+								<a className="title" href="#home">
+									Início
+								</a>
+							</li>
+							<li>
+								<a className="title" href="#about">
+									Sobre
+								</a>
+							</li>
+							<li>
+								<a className="title" href="#services">
+									Serviços
+								</a>
+							</li>
+							<li>
+								<a className="title" href="#testimonials">
+									Depoimentos
+								</a>
+							</li>
+							<li>
+								<a className="title" href="#price">
+									Planos
+								</a>
+							</li>
+							<li>
+								<a className="title" href="#contact">
+									Contato
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div className="toggle icon-menu"></div>
+					<div className="toggle icon-close"></div>
+				</nav>
+			</header>
+			<main>
+				<section className="section" id="home">
+					<div className="container grid">
+						<div className="image">
+							<img
+								src="https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=1738&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+								alt="Mulher sorrindo pentenado cabelo de outra mulher"
+							/>
+						</div>
+						<div className="text">
+							<h2 className="title">Saúde natural para os seus cabelos</h2>
+							<p>
+								Um salão exclusivo em São Paulo, especializado em tratamentos
+								naturais.
+							</p>
+							<a className="button" href="#">
+								Agendar um horário
+							</a>
+						</div>
+					</div>
+				</section>
+				<div className="divider-1" />
+
+				<section className="section" id="about">
+					<div className="container grid">
+						<div className="image">
+							<img
+								src="https://images.unsplash.com/photo-1559599101-f09722fb4948?q=80&w=1469&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+								alt="três cabelereiras"
+							/>
+						</div>
+						<div className="text">
+							<h2 className="title">Sobre nós</h2>
+							<p>
+								Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+								Necessitatibus deleniti perferendis vel molestiae soluta,
+								quaerat beatae dicta ducimus praesentium architecto harum
+								dolorum distinctio illo earum assumenda itaque. Omnis, quam
+								repellat.
+							</p>
+							<br />
+							<p>
+								Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
+								illum ratione impedit quae eum quis adipisci asperiores, est
+								doloribus distinctio excepturi minima eius dolore! Perferendis
+								laborum illo aspernatur repellendus ipsum.
+							</p>
+							<br />
+							<p>
+								Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed
+								exercitationem, illum sapiente quasi hic iusto odio maiores esse
+								quaerat quis necessitatibus at odit, dolores dicta, officia ab
+								quos. Provident, quae.
+							</p>
+						</div>
+					</div>
+				</section>
+
+				<div className="divider-2" />
+
+				<section className="section" id="services">
+					<div className="container grid">
+						<header>
+							<h2 className="title">Serviços</h2>
+							<p className="subtitle">
+								Com mais de 10 anos no mercado, o <strong>Beautysalon</strong>
+								já conquistou clientes de inúmeros países com seus tratamentos
+								exclusivos e totalmente naturais
+							</p>
+						</header>
+						<div className="cards grid">
+							<div className="card">
+								<i className="icon-woman-hair"></i>
+								<h3 className="title">Terapia capilar</h3>
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.
+									Dignissimos omnis praesentium et odio voluptas error.
+								</p>
+							</div>
+							<div className="card">
+								<i className="icon-trim"></i>
+								<h3 className="title">Cortes</h3>
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.
+									Dignissimos omnis praesentium et odio voluptas error.
+								</p>
+							</div>
+							<div className="card">
+								<i className="icon-cosmetic"></i>
+								<h3 className="title">Tratamento</h3>
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.
+									Dignissimos omnis praesentium et odio voluptas error.
+								</p>
+							</div>
+						</div>
+					</div>
+				</section>
+				<div className="divider-1" />
+
+				<section className="section" id="testimonials">
+					<div className="container">
+						<header>
+							<h2 className="title">Depoimentos de quem já passou por aqui</h2>
+						</header>
+
+						<Swiper
+							className="testimonials swiper-container"
+							// spaceBetween={50}
+							mousewheel={true}
+							pagination={{
+								clickable: true,
+							}}
+							breakpoints={{
+								767: {
+									slidesPerView: 2,
+									setWrapperSize: true,
+								},
+							}}
+							modules={[Pagination, Mousewheel, Keyboard]}
+							slidesPerView={1}
+							keyboard={true}
+							onSlideChange={() => console.log('slide change')}
+							onSwiper={swiper => console.log(swiper)}
+						>
+							<SwiperSlide>
+								<div className="testimonial">
+									<blockquote>
+										<p>
+											<span>&ldquo;</span>
+											Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+											Perspiciatis eius maxime maiores iste illum, impedit unde,
+											voluptates recusandae deserunt rerum earum!
+										</p>
+										<cite>
+											<Image src={image10} alt="image10" />
+											Everson Silva
+										</cite>
+									</blockquote>
+								</div>
+							</SwiperSlide>
+							<SwiperSlide className="testimonial">
+								<blockquote>
+									<p>
+										<span>&ldquo;</span>
+										Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+										Perspiciatis eius maxime maiores iste illum, impedit unde,
+										voluptates recusandae deserunt rerum earum!
+									</p>
+									<cite>
+										<Image src={image26} alt="image26" />
+										Murilo Silva
+									</cite>
+								</blockquote>
+							</SwiperSlide>
+							<SwiperSlide className="testimonial">
+								<blockquote>
+									<p>
+										<span>&ldquo;</span>
+										Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+										Perspiciatis eius maxime maiores iste illum, impedit unde,
+										voluptates recusandae deserunt rerum earum!
+									</p>
+									<cite>
+										<Image src={image56} alt="image56" />
+										Liliane Almeida
+									</cite>
+								</blockquote>
+							</SwiperSlide>
+						</Swiper>
+					</div>
+				</section>
+				<div className="divider-2" />
+
+				<section className="section" id="price">
+					<div className="container grid">
+						<header>
+							<h2 className="title">Planos</h2>
+							<p className="subtitle">
+								Com mais de 10 anos no mercado, o <strong>Beautysalon</strong>
+								já conquistou clientes de inúmeros países com seus tratamentos
+								exclusivos e totalmente naturais
+							</p>
+						</header>
+						<div className="cards grid">
+							<div className="card">
+								<i className="icon-woman-hair"></i>
+								<h3 className="title">Plano I</h3>
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.
+									Dignissimos omnis praesentium et odio voluptas error.
+								</p>
+							</div>
+							<div className="card">
+								<i className="icon-trim"></i>
+								<h3 className="title">Plano II</h3>
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.
+									Dignissimos omnis praesentium et odio voluptas error.
+								</p>
+							</div>
+							<div className="card">
+								<i className="icon-cosmetic"></i>
+								<h3 className="title">Plano III</h3>
+								<p>
+									Lorem ipsum dolor sit amet consectetur adipisicing elit.
+									Dignissimos omnis praesentium et odio voluptas error.
+								</p>
+							</div>
+						</div>
+					</div>
+				</section>
+				<div className="divider-1" />
+
+				{/* Price - Planos */}
+				{/* <section className="section" id="price">
+					<div className="container grid">
+						<header>
+							<h2 className="title">Depoimentos de quem já passou por aqui</h2>
+						</header>
+						<div className="testimonials">
+							<div className="testimonial">
+								<blockquote>
+									<p>
+										<span>&ldquo;</span>
+										Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+										Perspiciatis eius maxime maiores iste illum, impedit unde,
+										voluptates recusandae deserunt rerum earum!
+									</p>
+									<cite>
+										<Image src={image10} alt="image10" />
+										Everson Silva
+									</cite>
+								</blockquote>
+							</div>
+							<div className="testimonial">
+								<blockquote>
+									<p>
+										<span>&ldquo;</span>
+										Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+										Perspiciatis eius maxime maiores iste illum, impedit unde,
+										voluptates recusandae deserunt rerum earum!
+									</p>
+									<cite>
+										<Image src={image26} alt="image26" />
+										Murilo Silva
+									</cite>
+								</blockquote>
+							</div>
+							<div className="testimonial">
+								<blockquote>
+									<p>
+										<span>&ldquo;</span>
+										Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+										Perspiciatis eius maxime maiores iste illum, impedit unde,
+										voluptates recusandae deserunt rerum earum!
+									</p>
+									<cite>
+										<Image src={image56} alt="image56" />
+										Liliane Almeida
+									</cite>
+								</blockquote>
+							</div>
+						</div>
+					</div>
+				</section> */}
+				{/* <section className="section" id="price">
+					<div className="container grid">Planos</div>
+				</section> */}
+				<section className="section" id="contact">
+					<div className="container grid">
+						<div className="text">
+							<h2 className="title">Entre em contato com a gente!</h2>
+							<p>
+								Entre em contato com a Beautysalon, queremos tirar suas dúvidas,
+								ouvir suas críticas e sugestões.
+							</p>
+							<a
+								href="https://api.whatsapp.com/send?phone=+5519999999999&text=App Ginga Brasil"
+								target="_blank"
+								className="button"
+							>
+								<i className="icon-whatsapp"></i>
+								Entrar em contato
+							</a>
+						</div>
+						<div className="links">
+							<ul className="grid">
+								<li>
+									<i className="icon-phone"></i>
+									(19) 99999-9999
+								</li>
+								<li>
+									<i className="icon-map-pin"></i>
+									Rua João Pedro Corrêa, 1111
+								</li>
+								<li>
+									<i className="icon-mail"></i>
+									everson_gsilva@yahoo.com.br
+								</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				<div className="divider-1" />
+			</main>
+			<footer className="section">
+				<div className="container grid">
+					<div className="brand">
+						<a className="logo logo-alt" href="#home">
+							beauty<span>saloon</span>.
+						</a>
+						<p>©2021 Beautysalon.</p>
+						<p>Todos os direitos reservados.</p>
+					</div>
+					<div className="social grid">
+						<a target="_blank" href="https://instagram.com">
+							<i className="icon-instagram"></i>
+						</a>
+						<a target="_blank" href="https://facebook.com">
+							<i className="icon-facebook"></i>
+						</a>
+						<a target="_blank" href="https://youtube.com">
+							<i className="icon-youtube"></i>
+						</a>
+					</div>
+				</div>
+			</footer>
+			<a href="#home" className="back-to-top">
+				<i className="icon-arrow-up"></i>
+			</a>
+		</div>
+	);
 }

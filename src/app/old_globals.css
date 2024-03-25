@@ -1,45 +1,51 @@
-/*================  RESET ====================== */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
 	margin: 0;
+	border: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
-
-ul {
-	list-style: none;
-}
-
 a {
 	text-decoration: none;
 }
 
-img {
-	width: 100%;
-	height: auto;
+/* :root {
+	--foreground-rgb: 0, 0, 0;
+	--background-start-rgb: 214, 219, 220;
+	--background-end-rgb: 255, 255, 255;
+} */
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--header-height: 4.5rem;
+
+		/* colors */
+		--hue: 159;
+		/* HSL color mode */
+		--base-color: hsl(var(--hue) 36% 57%);
+		--base-color-second: hsl(var(--hue) 65% 88%);
+		--base-color-alt: hsl(var(--hue) 57% 53%);
+		--title-color: hsl(var(--hue) 41% 10%);
+		--text-color: hsl(0 0% 46%);
+		--text-color-light: hsl(0 0% 98%);
+		--body-color: hsl(0 0% 98%);
+
+		/* fonts */
+		--title-font-size: 1.875rem;
+		--subtitle-font-size: 1rem;
+
+		--title-font: 'Poppins', sans-serif;
+		--body-font: 'DM Sans', sans-serif;
+
+		--foreground-rgb: 255, 255, 255;
+		--background-start-rgb: 0, 0, 0;
+		--background-end-rgb: 0, 0, 0;
+	}
 }
-
-/*================  VARIABLES ================= */
-:root {
-	--header-height: 4.5rem;
-
-	/* colors */
-	--hue: 159;
-	/* HSL color mode */
-	--base-color: hsl(var(--hue) 36% 57%);
-	--base-color-second: hsl(var(--hue) 65% 88%);
-	--base-color-alt: hsl(var(--hue) 57% 53%);
-	--title-color: hsl(var(--hue) 41% 10%);
-	--text-color: hsl(0 0% 46%);
-	--text-color-light: hsl(0 0% 98%);
-	--body-color: hsl(0 0% 98%);
-
-	--subtitle-font-size: 1rem;
-	--title-font-size: 1.875rem;
-	--title-font: 'Poppins', sans-serif;
-	--body-font: 'DM Sans', sans-serif;
-}
-/*=================== BASE ==================== */
-
+/*===  BASE ============================ */
 html {
 	scroll-behavior: smooth;
 }
@@ -109,6 +115,7 @@ body {
 .section .title {
 	margin-bottom: 1rem;
 }
+
 .section .subtitle {
 	font-size: var(--subtitle-font-size);
 }
@@ -122,7 +129,7 @@ body {
 }
 
 #header {
-	/* border-bottom: 1px solid #e4e4e4; */
+	border-bottom: 1px solid #e4e4e4;
 	margin-bottom: 2rem;
 	display: flex;
 
@@ -134,27 +141,11 @@ body {
 	width: 100%;
 }
 
-/*  Mudando as propriedades no scroll */
-
 #header.scroll {
-	box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
-	background-color: var(--base-color);
-	border-bottom: none;
+	box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
 }
 
-#header.scroll .logo span {
-	color: white;
-}
-
-#header.scroll .icon-menu {
-	color: white;
-}
-
-main {
-	margin-top: calc(var(--header-height) + 2rem);
-}
-
-/*===============  LOGO  =============== */
+/*====  LOGO ============================ */
 .logo {
 	font: 700 1.31rem var(--title-font);
 	color: var(--title-color);
@@ -163,12 +154,12 @@ main {
 .logo span {
 	color: var(--base-color);
 }
+
 .logo-alt span {
 	color: var(--body-color);
 }
 
-/*===============  BEGIN NAVIGATION  =============== */
-
+/*====  NAVIGATION ============================ */
 nav {
 	height: var(--header-height);
 	display: flex;
@@ -212,25 +203,24 @@ nav ul li a.active::after {
 nav .menu {
 	opacity: 0;
 	visibility: hidden;
-
 	top: -20rem;
-	transition: 0.3s;
+	transition: 0.2s;
 }
 
 nav .menu ul {
 	display: none;
 }
 
-/* Aqui incluimos a classe show no menu via JS, ela será incluída via JS */
-
-/*===== Mostrar Menu  ===== */
+/* Mostrar menu */
 nav.show .menu {
 	opacity: 1;
 	visibility: visible;
 
 	background: var(--body-color);
+
 	height: 100vh;
 	width: 100vw;
+
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -247,8 +237,7 @@ nav.show ul.grid {
 	gap: 4rem;
 }
 
-/* Toggle Menu */
-
+/* toggle menu */
 .toggle {
 	color: var(--base-color);
 	font-size: 1.5rem;
@@ -258,10 +247,11 @@ nav.show ul.grid {
 nav .icon-close {
 	visibility: hidden;
 	opacity: 0;
+
 	position: absolute;
 	top: -1.5rem;
-
 	right: 1.5rem;
+
 	transition: 0.2s;
 }
 
@@ -270,10 +260,6 @@ nav.show div.icon-close {
 	opacity: 1;
 	top: 1.5rem;
 }
-
-/*===== Fim Mostrar Menu  ===== */
-
-/*=============== END NAVIGATION  =============== */
 
 /*====  HOME ============================ */
 #home {
@@ -323,7 +309,7 @@ nav.show div.icon-close {
 	margin-bottom: 2rem;
 }
 
-/*=============== BEGIN ABOUT  =============== */
+/*====  ABOUT ============================ */
 #about {
 	background: white;
 }
@@ -361,18 +347,7 @@ nav.show div.icon-close {
 	margin-right: 1.5rem;
 }
 
-#about .text h1 {
-	margin-bottom: 1rem;
-}
-
-#about .text p {
-	margin-bottom: 2rem;
-}
-
-/*=============== END ABOUT  =============== */
-
-/*=============== BEGIN SERVICES  ============= */
-
+/*====  SERVICES ============================ */
 .cards.grid {
 	gap: 1.5rem;
 }
@@ -396,10 +371,8 @@ nav.show div.icon-close {
 	font-size: 1.5rem;
 	margin-bottom: 0.75rem;
 }
-/*=============== END SERVICES  =============== */
 
-/*=============== BEGING TESTIMONIALS  =============== */
-
+/*====  TESTIMONIALS ============================ */
 #testimonials {
 	background: white;
 }
@@ -431,8 +404,7 @@ nav.show div.icon-close {
 #testimonials blockquote p span {
 	font: 700 2.5rem serif;
 	position: absolute;
-
-	top: -0.3rem;
+	top: -0.375rem;
 	left: -1.875rem;
 	color: var(--base-color);
 }
@@ -440,7 +412,6 @@ nav.show div.icon-close {
 #testimonials cite {
 	display: flex;
 	align-items: center;
-	gap: 0.5rem;
 	font-style: normal;
 }
 
@@ -449,7 +420,9 @@ nav.show div.icon-close {
 	height: 2rem;
 	object-fit: cover;
 	clip-path: circle();
+	margin-right: 0.5rem;
 }
+
 /* swiper */
 .swiper-slide {
 	height: auto;
@@ -461,19 +434,11 @@ nav.show div.icon-close {
 	height: 0.75rem;
 }
 
-.swiper-pagination-bullet {
-	width: 0.75rem !important;
-	height: 0.75rem !important;
-}
-
 .swiper-pagination-bullet-active {
 	background: var(--base-color);
 }
 
-/*================= END TESTIMONIALS ================= */
-
-/*================= BEGIN CONTACTS ================= */
-
+/*====  CONTACT ============================ */
 #contact .grid {
 	gap: 4rem;
 }
@@ -501,12 +466,13 @@ nav.show div.icon-close {
 	color: var(--base-color);
 }
 
-/*================= END CONTACTS ================= */
-
-/*================= BEGIN FOOTER ================= */
-
+/*====  FOOTER ============================ */
 footer {
 	background: var(--base-color);
+}
+
+footer.section {
+	padding: 4rem 0;
 }
 
 footer .logo {
@@ -518,18 +484,10 @@ footer .brand p {
 	color: var(--text-color-light);
 	margin-bottom: 0.75rem;
 }
-footer.section {
-	padding: 4rem 0;
-}
 
 footer i {
 	font-size: 1.5rem;
 	color: var(--text-color-light);
-}
-
-footer .social a {
-	transition: 0.3s;
-	display: inline-block;
 }
 
 footer .social {
@@ -537,14 +495,16 @@ footer .social {
 	width: fit-content;
 }
 
+footer .social a {
+	transition: 0.3s;
+	display: inline-block;
+}
+
 footer .social a:hover {
 	transform: translateY(-8px);
 }
 
-/*================= END FOOTER   ================= */
-
-/*================= BEGIN BACKTOTOP   ================= */
-
+/* Back to top */
 .back-to-top {
 	background: var(--base-color);
 	color: var(--text-color-light);
@@ -571,15 +531,10 @@ footer .social a:hover {
 	opacity: 1;
 	transform: translateY(0);
 }
-/*================= END BACKTOTOP    ================= */
 
 /*========= MEDIA QUERIES =========*/
 /* extra large devices: 1200 > */
 @media (min-width: 1200px) {
-	#header.scroll .title {
-		color: var(--text-color-light);
-	}
-
 	/* reusable classes */
 	.container {
 		max-width: 1120px;
@@ -618,11 +573,6 @@ footer .social a:hover {
 	nav .menu ul li a.title {
 		font: 400 1rem var(--body-font);
 		-webkit-font-smoothing: antialiased;
-	}
-
-	nav ul li a.title.active {
-		font-weight: bold;
-		-webkit-font-smoothing: auto;
 	}
 
 	nav .menu ul li a.title.active {
