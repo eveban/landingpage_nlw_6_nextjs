@@ -663,6 +663,11 @@ footer .social a:hover {
 		grid-auto-flow: column;
 	}
 
+	
+	#about .text p {
+		font: 400 1rem var(--body-font);
+	}
+
 	/* services */
 	.cards {
 		grid-template-columns: 1fr 1fr 1fr;
